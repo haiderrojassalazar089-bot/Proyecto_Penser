@@ -1,2 +1,14 @@
 # Datos privados egresados USTA
 data/raw/ESTUDIO_DE_PERCEPCION_EGRESADOS.xlsx
+
+# Bases y artefactos derivados de datos privados
+data/interim/
+data/processed/
+artifacts/
+models/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
