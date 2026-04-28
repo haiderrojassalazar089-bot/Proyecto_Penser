@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, "src/percepcion")
 """
 test_features.py
 ================
@@ -8,7 +10,7 @@ import pytest
 import pandas as pd
 import numpy as np
 import sys
-sys.path.insert(0, "src")
+sys.path.insert(0, "src/percepcion")
 
 
 # ---------------------------------------------------------------------------
@@ -96,7 +98,7 @@ def test_limpiar_competencias_outlier_a_nan():
 
 def test_codificar_binarias_solo_cero_uno(df_base):
     """Verifica que las binarias quedan como 0 o 1 (o NaN)."""
-    from features import renombrar_columnas, codificar_binarias, COLS_BIENESTAR
+    from features import renombrar_columnas, codificar_binarias_bienestar as codificar_binarias, COLS_BIENESTAR
     df_out = renombrar_columnas(df_base.copy())
     df_out = codificar_binarias(df_out)
     cols = [c for c in COLS_BIENESTAR if c in df_out.columns]
@@ -107,7 +109,7 @@ def test_codificar_binarias_solo_cero_uno(df_base):
 
 def test_codificar_binarias_si_es_uno():
     """Verifica que 'Si' se convierte a 1."""
-    from features import renombrar_columnas, codificar_binarias, COLS_BIENESTAR
+    from features import renombrar_columnas, codificar_binarias_bienestar as codificar_binarias, COLS_BIENESTAR
     col_orig = "¿Adquirió bienes materiales después de obtener su título de pregrado y posgrado?\xa0(casa, carro, inversión a largo plazo)."
     col_nuevo = "adquirio_bienes"
     df = pd.DataFrame({col_orig: ["Si", "No", "Si", "No"]})
@@ -144,7 +146,7 @@ def test_movilidad_social_columna_creada(df_base):
 
 def test_score_bienestar_rango_valido(df_base):
     """Verifica que el score de bienestar está entre 0 y 7."""
-    from features import renombrar_columnas, codificar_binarias, calcular_score_bienestar
+    from features import renombrar_columnas, codificar_binarias_bienestar as codificar_binarias, calcular_score_bienestar
     df_out = renombrar_columnas(df_base.copy())
     df_out = codificar_binarias(df_out)
     df_out = calcular_score_bienestar(df_out)
@@ -173,7 +175,7 @@ def test_codificar_satisfaccion_valores_correctos(df_base):
 def test_pipeline_completo_no_falla(df_base, tmp_path):
     """Verifica que el pipeline completo de features corre sin errores."""
     from features import (
-        renombrar_columnas, limpiar_competencias, codificar_binarias,
+        renombrar_columnas, limpiar_competencias, codificar_binarias_bienestar as codificar_binarias,
         codificar_satisfaccion, calcular_movilidad_social,
         calcular_score_bienestar
     )

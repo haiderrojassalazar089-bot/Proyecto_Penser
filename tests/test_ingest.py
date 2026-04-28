@@ -63,7 +63,7 @@ def df_con_problemas():
 def test_eliminar_columna_indice_existe(df_limpio):
     """Verifica que se elimina Unnamed: 0 cuando existe."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_columna_indice
     from ingest import ReporteCalidad
 
@@ -75,7 +75,7 @@ def test_eliminar_columna_indice_existe(df_limpio):
 def test_eliminar_columna_indice_no_existe():
     """Verifica que no falla si Unnamed: 0 no existe."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_columna_indice
 
     df = pd.DataFrame({"col_a": [1, 2], "col_b": [3, 4]})
@@ -90,7 +90,7 @@ def test_eliminar_columna_indice_no_existe():
 def test_eliminar_pii_remueve_columnas(df_limpio):
     """Verifica que nombre y email son eliminados."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_pii, ReporteCalidad
 
     r = ReporteCalidad()
@@ -102,7 +102,7 @@ def test_eliminar_pii_remueve_columnas(df_limpio):
 def test_eliminar_pii_registra_en_reporte(df_limpio):
     """Verifica que el reporte registra las columnas PII eliminadas."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_pii, ReporteCalidad
 
     r = ReporteCalidad()
@@ -117,7 +117,7 @@ def test_eliminar_pii_registra_en_reporte(df_limpio):
 def test_eliminar_duplicados_detecta_exactos():
     """Verifica que se eliminan filas 100% idénticas usando columnas clave PENSER."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_duplicados, ReporteCalidad
 
     df = pd.DataFrame({
@@ -138,7 +138,7 @@ def test_eliminar_duplicados_detecta_exactos():
 def test_eliminar_duplicados_sin_duplicados():
     """Verifica que no elimina nada cuando no hay duplicados."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_duplicados, ReporteCalidad
 
     df = pd.DataFrame({
@@ -158,7 +158,7 @@ def test_eliminar_duplicados_sin_duplicados():
 def test_eliminar_filas_vacias():
     """Verifica que se eliminan filas con todos los valores nulos."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_filas_completamente_vacias, ReporteCalidad
 
     df = pd.DataFrame({
@@ -178,7 +178,7 @@ def test_eliminar_filas_vacias():
 def test_validar_likert_corrige_outliers():
     """Verifica que valores fuera de [1-5] se convierten a NaN."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import validar_likert, ReporteCalidad, COLS_LIKERT
 
     col = COLS_LIKERT[0]
@@ -192,7 +192,7 @@ def test_validar_likert_corrige_outliers():
 def test_validar_likert_sin_outliers():
     """Verifica que valores válidos [1-5] no se modifican."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import validar_likert, ReporteCalidad, COLS_LIKERT
 
     col = COLS_LIKERT[0]
@@ -210,7 +210,7 @@ def test_validar_likert_sin_outliers():
 def test_validar_binarias_corrige_valores_raros():
     """Verifica que valores distintos de Si/No se convierten a NaN."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import validar_binarias, ReporteCalidad, COLS_BINARIAS
 
     col = COLS_BINARIAS[0]
@@ -228,7 +228,7 @@ def test_validar_binarias_corrige_valores_raros():
 def test_validar_estrato_corrige_anomalias():
     """Verifica que valores de estrato fuera de [1-6] se convierten a NaN."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import validar_estrato, ReporteCalidad
 
     col = "Estrato socioeconómico actual"
@@ -242,7 +242,7 @@ def test_validar_estrato_corrige_anomalias():
 def test_validar_estrato_valido_sin_cambios():
     """Verifica que estratos válidos [1-6] no se modifican."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import validar_estrato, ReporteCalidad
 
     col = "Estrato socioeconómico actual"
@@ -260,7 +260,7 @@ def test_validar_estrato_valido_sin_cambios():
 def test_eliminar_columnas_vacias():
     """Verifica que columnas con >95% nulos se eliminan."""
     import sys
-    sys.path.insert(0, "src")
+    sys.path.insert(0, "src/percepcion")
     from ingest import eliminar_columnas_vacias, ReporteCalidad
 
     df = pd.DataFrame({
